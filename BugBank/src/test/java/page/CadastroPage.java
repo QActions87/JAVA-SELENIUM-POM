@@ -14,8 +14,8 @@ public class CadastroPage {
     public String contaComSaldoToggle = "//*[@id=\"toggleAddBalance\"]";
     public String btnCadastrar = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button";
 
-    // Method para clicar no campo Email:
-    public void clicarEmail() {
+    // Method para preencher o campo Email:
+    public void preencherEmail() {
         driver.findElement(By.xpath(email));
     }
 }
