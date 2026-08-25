@@ -6,6 +6,10 @@ import org.openqa.selenium.WebDriver;
 public class CadastroPage {
     // Declarando web driver:
     WebDriver driver;
+    // Criando o method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro:
+    public CadastroPage(WebDriver driver) {
+        this.driver = driver;
+    }
     // Mapeamento dos elementos da paǵina de cadastro:
     public String campoEmail = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input";
     public String campoNome = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[3]/input";
