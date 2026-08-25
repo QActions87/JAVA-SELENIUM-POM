@@ -14,7 +14,7 @@ public class CadastroTest {
         // driver recebendo a instância do ChromeDriver():
         driver = new ChromeDriver();
         // cadastroPage recebendo a instância de CadastroPage:
-        cadastroPage = new CadastroPage();
+        cadastroPage = new CadastroPage(driver);
 
     }
 }

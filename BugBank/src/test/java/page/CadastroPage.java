@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class CadastroPage {
     // Declarando web driver:
     WebDriver driver;
-    // Criando o method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro:
+    /** Method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro: */
     public CadastroPage(WebDriver driver) {
         this.driver = driver;
     }
