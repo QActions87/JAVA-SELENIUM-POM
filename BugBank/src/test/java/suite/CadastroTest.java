@@ -15,7 +15,15 @@ public class CadastroTest {
         driver = new ChromeDriver();
         // cadastroPage recebendo a instância de CadastroPage:
         cadastroPage = new CadastroPage(driver);
-
+    }
+    // Teste de cadastro:
+    public void testeCadastro() {
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoEmail, "qaction@gmail.com");
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoNome, "Tiago");
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoSenha, "senha123");
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoConfirmacaoSenha, "senha123");
+        cadastroPage.clicarPorXpath(cadastroPage.campoContaComSaldoToggle);
+        cadastroPage.clicarPorXpath(cadastroPage.btnCadastrar);
     }
 }
 
