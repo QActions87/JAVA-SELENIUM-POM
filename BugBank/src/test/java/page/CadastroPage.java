@@ -1,5 +1,6 @@
 package page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CadastroPage {
@@ -12,4 +13,9 @@ public class CadastroPage {
     public String confirmacaoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input";
     public String contaComSaldoToggle = "//*[@id=\"toggleAddBalance\"]";
     public String btnCadastrar = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button";
+
+    // Method para clicar no campo Email:
+    public void clicarEmail() {
+        driver.findElement(By.xpath(email));
+    }
 }
