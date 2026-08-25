@@ -7,15 +7,20 @@ public class CadastroPage {
     // Declarando web driver:
     WebDriver driver;
     // Mapeamento dos elementos da paǵina de cadastro:
-    public String email = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input";
-    public String nome = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[3]/input";
-    public String senha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input";
-    public String confirmacaoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input";
-    public String contaComSaldoToggle = "//*[@id=\"toggleAddBalance\"]";
+    public String campoEmail = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input";
+    public String campoNome = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[3]/input";
+    public String campoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input";
+    public String campoConfirmacaoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input";
+    public String campoContaComSaldoToggle = "//*[@id=\"toggleAddBalance\"]";
     public String btnCadastrar = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button";
 
     // Method para preencher o campo Email:
-    public void preencherEmail() {
-        driver.findElement(By.xpath(email));
+    public void preencherValorPorXpath(String elemento, String valor) {
+        driver.findElement(By.xpath(elemento)).sendKeys(valor);
+    }
+
+    // Method para clicar no toggle e botão 'Cadastrar':
+    public void clicarPorXpath(String elemento) {
+        driver.findElement(By.xpath(elemento)).click();
     }
 }
