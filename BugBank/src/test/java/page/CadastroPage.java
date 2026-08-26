@@ -1,7 +1,9 @@
 package page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class CadastroPage {
     // Declarando web driver:
@@ -11,6 +13,7 @@ public class CadastroPage {
         this.driver = driver;
     }
     // Mapeamento dos elementos da paǵina de cadastro:
+    public  String btnRegistrar = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]";
     public String campoEmail = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input";
     public String campoNome = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[3]/input";
     public String campoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input";
@@ -23,8 +26,10 @@ public class CadastroPage {
         driver.findElement(By.xpath(elemento)).sendKeys(valor);
     }
 
+
     // Method para clicar no toggle e botão 'Cadastrar':
-    public void clicarPorXpath(String elemento) {
-        driver.findElement(By.xpath(elemento)).click();
+    public void clicarPorXpath(String xpath) {
+        WebElement elemento = driver.findElement(By.xpath(xpath));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
     }
 }
