@@ -28,6 +28,10 @@ public class CadastroPage {
 
 
     // Method para clicar no toggle e botão 'Cadastrar':
+    /** Clique Direto via JavaScript:
+     * Se o formulário tiver algum footer fixo ou modal invisível por cima do botão,
+     * o clique nativo do Selenium falha. Com esta solução,
+     * o JavaScript ignora a camada visual e dispara o evento direto no DOM. */
     public void clicarPorXpath(String xpath) {
         WebElement elemento = driver.findElement(By.xpath(xpath));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
