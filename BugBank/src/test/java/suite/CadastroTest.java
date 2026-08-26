@@ -39,11 +39,12 @@ public class CadastroTest {
         cadastroPage.preencherValorPorXpath(cadastroPage.campoConfirmacaoSenha, "senha123");
         cadastroPage.clicarPorXpath(cadastroPage.campoContaComSaldoToggle);
         cadastroPage.clicarPorXpath(cadastroPage.btnCadastrar);
+        cadastroPage.validarCriacaoDeContaComSucesso();
     }
 
     @After
     public void after() {
-
+        driver.quit();
     }
 }
 
