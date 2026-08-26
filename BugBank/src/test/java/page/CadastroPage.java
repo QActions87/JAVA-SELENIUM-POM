@@ -1,5 +1,6 @@
 package page;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -36,4 +37,19 @@ public class CadastroPage {
         WebElement elemento = driver.findElement(By.xpath(xpath));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
     }
+
+    public void validarCriacaoDeContaComSucesso() {
+        // Assert do JUnit:
+        Assert.assertTrue(driver.getPageSource().contains("foi criada com sucesso"));
+    }
 }
+
+
+
+
+
+
+
+
+
+
