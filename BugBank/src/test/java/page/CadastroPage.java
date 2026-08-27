@@ -5,16 +5,35 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CadastroPage {
     // Declarando web driver:
     WebDriver driver;
-    // Mapeamento do locator do texto no modal do BugBank
+    // Mapeamento do Xpath do texto no modal do BugBank
     public String textoModalSucesso = "//*[@id=\"modalText\"]";
     /** Method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro: */
     public CadastroPage(WebDriver driver) {
         this.driver = driver;
     }
+
+    // Method para esperar o modal aparecer e capturar a mensagem:
+    public String obterTextoDoModal() {
+        // 1. Cria a espera explícita de até 10 segundos
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // 2. Aguarda até que o elemento do modal esteja visível na tela
+        WebElement elementoModal = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(textoModalSucesso))
+        );
+
+        // 3. Captura e retorna o texto contido dentro da tag HTML
+        return elementoModal.getText();
+    }
+
     // Mapeamento dos elementos da paǵina de cadastro:
     public  String btnRegistrar = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]";
     public String campoEmail = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input";
