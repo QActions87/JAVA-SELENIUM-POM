@@ -20,17 +20,13 @@ public class CadastroPage {
         this.driver = driver;
     }
 
-    // Method para esperar o modal aparecer e capturar a mensagem:
+    /** Method para esperar o modal aparecer e capturar a mensagem: */
     public String obterTextoDoModal() {
-        // 1. Cria a espera explícita de até 10 segundos
+        // 1. Cria a espera explícita de até 10 segundos:
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        // 2. Aguarda até que o elemento do modal esteja visível na tela
-        WebElement elementoModal = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath(textoModalSucesso))
-        );
-
-        // 3. Captura e retorna o texto contido dentro da tag HTML
+        // 2. Aguarda até que o elemento do modal esteja visível na tela:
+        WebElement elementoModal = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(textoModalSucesso)));
+        // 3. Captura e retorna o texto contido dentro da tag HTML:
         return elementoModal.getText();
     }
 
