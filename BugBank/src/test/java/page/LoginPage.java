@@ -1,5 +1,6 @@
 package page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
@@ -18,5 +19,11 @@ public class LoginPage {
     }
 
     // Methods para interagir com os elementos mapeados:
+    public void clicarPorXpath() {
 
+    }
+
+    public void preencherCampo(String elemento, String valor) {
+        driver.findElement(By.xpath(elemento)).sendKeys("qaction@gmail.com") ;
+    }
 }
