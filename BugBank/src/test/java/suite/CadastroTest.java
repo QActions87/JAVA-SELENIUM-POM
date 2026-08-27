@@ -59,6 +59,9 @@ public class CadastroTest {
 
         // Valida se a mensagem esperada está contida na String capturada:
         Assert.assertTrue(textoModal.contains("foi criada com sucesso"));
+
+        // Fechando o modal de confirmação do cadastro:
+        cadastroPage.clicarPorXpath(cadastroPage.btnFecharModalSucessoDoCadastro);
     }
 
     @After
