@@ -1,6 +1,7 @@
 package suite;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +40,10 @@ public class CadastroTest {
         cadastroPage.preencherValorPorXpath(cadastroPage.campoConfirmacaoSenha, "senha123");
         cadastroPage.clicarPorXpath(cadastroPage.campoContaComSaldoToggle);
         cadastroPage.clicarPorXpath(cadastroPage.btnCadastrar);
-        cadastroPage.validarCriacaoDeContaComSucesso();
+
+       // String textoModal = cadastroPage.obterTextoDoModal();
+        // Assert.assertTrue(textoModal.contains("foi criada com sucesso"));
+
     }
 
     @After

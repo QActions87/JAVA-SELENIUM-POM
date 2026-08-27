@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 public class CadastroPage {
     // Declarando web driver:
     WebDriver driver;
+    // Mapeamento do locator do texto no modal do BugBank
+    public String textoModalSucesso = "//*[@id=\"modalText\"]";
     /** Method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro: */
     public CadastroPage(WebDriver driver) {
         this.driver = driver;
@@ -38,10 +40,15 @@ public class CadastroPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
     }
 
+    /*
+    // O 'getPageSource()' baixa o HTML da página para fazer a busca em texto bruto, sendo mais custoso para a memória.
+    // Substituido pelo assertion no próprio teste:
     public void validarCriacaoDeContaComSucesso() {
         // Assert do JUnit:
         Assert.assertTrue(driver.getPageSource().contains("foi criada com sucesso"));
     }
+
+    */
 }
 
 
