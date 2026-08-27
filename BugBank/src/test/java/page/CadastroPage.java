@@ -13,7 +13,7 @@ import java.time.Duration;
 public class CadastroPage {
     // Declarando web driver:
     WebDriver driver;
-    // Mapeamento do Xpath do texto no modal do BugBank
+    /** Mapeamento do Xpath do texto no modal do BugBank: */
     public String textoModalSucesso = "//*[@id=\"modalText\"]";
     /** Method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro: */
     public CadastroPage(WebDriver driver) {
@@ -24,20 +24,21 @@ public class CadastroPage {
     public String obterTextoDoModal() {
         // 1. Cria a espera explícita de até 10 segundos:
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // 2. Aguarda até que o elemento do modal esteja visível na tela:
+        // 2. 'wait' aguarda até que o elemento do modal esteja visível na tela, atribuído à variável 'elementoModal':
         WebElement elementoModal = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(textoModalSucesso)));
         // 3. Captura e retorna o texto contido dentro da tag HTML:
         return elementoModal.getText();
     }
 
     // Mapeamento dos elementos da paǵina de cadastro:
-    public  String btnRegistrar = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]";
+    public String btnRegistrar = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]";
     public String campoEmail = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input";
     public String campoNome = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[3]/input";
     public String campoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input";
     public String campoConfirmacaoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input";
     public String campoContaComSaldoToggle = "//*[@id=\"toggleAddBalance\"]";
     public String btnCadastrar = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button";
+    public String btnFecharModalSucessoDoCadastro = "//*[@id=\"btnCloseModal\"]";
 
     // Method para preencher o campo Email:
     public void preencherValorPorXpath(String elemento, String valor) {
@@ -56,13 +57,13 @@ public class CadastroPage {
     }
 
     /*
-    // O 'getPageSource()' baixa o HTML da página para fazer a busca em texto bruto, sendo mais custoso para a memória.
+    // Este method foi substituido. Pois,
+    // o 'getPageSource()' baixa o HTML da página para fazer a busca em texto bruto, sendo mais custoso para a memória.
     // Substituido pelo assertion no próprio teste:
     public void validarCriacaoDeContaComSucesso() {
         // Assert do JUnit:
         Assert.assertTrue(driver.getPageSource().contains("foi criada com sucesso"));
     }
-
     */
 }
 
