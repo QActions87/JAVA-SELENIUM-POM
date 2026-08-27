@@ -24,6 +24,6 @@ public class LoginPage {
     }
 
     public void preencherCampo(String elemento, String valor) {
-        driver.findElement(By.xpath(elemento)).sendKeys("qaction@gmail.com") ;
+        driver.findElement(By.xpath(elemento)).sendKeys(valor) ;
     }
 }
