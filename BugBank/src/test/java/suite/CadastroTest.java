@@ -33,17 +33,32 @@ public class CadastroTest {
     // Teste de cadastro:
     @Test
     public void testeCadastro() {
+        // Clica no botão inicial 'Registrar' para abrir o formulário de cadastro na tela:
         cadastroPage.clicarPorXpath(cadastroPage.btnRegistrar);
+
+        // Preenche o campo de e-mail com o endereço do usuário:
         cadastroPage.preencherValorPorXpath(cadastroPage.campoEmail, "qaction@gmail.com");
+
+        // Preenche o campo de nome do usuário:
         cadastroPage.preencherValorPorXpath(cadastroPage.campoNome, "Tiago");
+
+        // Preencher o campo de senha:
         cadastroPage.preencherValorPorXpath(cadastroPage.campoSenha, "senha123");
+
+        // Preenche o campo de confirmação para validar a senha digitada:
         cadastroPage.preencherValorPorXpath(cadastroPage.campoConfirmacaoSenha, "senha123");
+
+        // Clica no toggle para ativar a opção de criar a conta já com saldo inicial:
         cadastroPage.clicarPorXpath(cadastroPage.campoContaComSaldoToggle);
+
+        // Clica no botão final 'Cadastrar' para submeter os dados do formulário:
         cadastroPage.clicarPorXpath(cadastroPage.btnCadastrar);
 
-       // String textoModal = cadastroPage.obterTextoDoModal();
-        // Assert.assertTrue(textoModal.contains("foi criada com sucesso"));
+        // O method espera o modal, pega o texto interno e retorna para a variável:
+        String textoModal = cadastroPage.obterTextoDoModal();
 
+        // Valida se a mensagem esperada está contida na String capturada:
+        Assert.assertTrue(textoModal.contains("foi criada com sucesso"));
     }
 
     @After
