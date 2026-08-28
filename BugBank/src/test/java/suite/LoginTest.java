@@ -20,17 +20,25 @@ public class LoginTest {
 
     @Before
     public void before() {
-        // Instanciação do driver:
-        driver = new ChromeDriver();
-        // Espera implícita, antes de falhar o teste:
+        // Configurações para estabilizar a sessão do Chrome no Linux (Zorin OS):
+        org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
+        // Instanciação do driver passando as opções configuradas:
+        driver = new ChromeDriver(options);
+
+        // Espera implícita:
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        // Espera até 5 segundos o carregamento da página:
+        // Espera de carregamento de página:
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
-        // Variável 'cadastroPage' recebendo a instância e criando o objeto recebendo o driver:
+
+        // Instanciação dos Page Objects:
         cadastroPage = new CadastroPage(driver);
-        // Instanciação da classe 'LoginPage' recebendo o driver inicializado como argumento:
         loginPage = new LoginPage(driver);
-        // Acessando URL:
+
+        // Acessando a URL:
         driver.get("http://localhost:3000/#");
     }
 
@@ -78,6 +86,9 @@ public class LoginTest {
 
         // Pressionar botão Acessar:
         loginPage.clicarPorXpath(loginPage.btnAcessar);
+
+        // Validando login:
+        loginPage.validarLogin();
     }
 }
 

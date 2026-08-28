@@ -20,7 +20,7 @@ public class LoginPage {
 
     // Methods para interagir com os elementos mapeados por xpath:
     public void clicarPorXpath(String elemento) {
-        driver.findElement(By.xpath(elemento));
+        driver.findElement(By.xpath(elemento)).click();
     }
 
     public void preencherCampo(String elemento, String valor) {
