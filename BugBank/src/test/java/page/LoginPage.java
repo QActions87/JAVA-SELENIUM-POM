@@ -3,6 +3,10 @@ package page;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
     // Mapeamento da página de Login:
@@ -30,6 +34,13 @@ public class LoginPage {
 
     // Method para validar login:
     public void validarLogin() {
+        // Cria a espera explícita de até 10 segundos para a mudança de URL
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Aguarda especificamente até que a URL do navegador seja exatamente 'http://localhost:3000/home'
+        wait.until(ExpectedConditions.urlToBe("http://localhost:3000/home"));
+
+        // Opcional: Assert para confirmar após o término da espera
         Assert.assertEquals("http://localhost:3000/home", driver.getCurrentUrl());
     }
 }

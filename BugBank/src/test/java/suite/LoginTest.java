@@ -1,5 +1,6 @@
 package suite;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,6 +91,13 @@ public class LoginTest {
         // Validando login:
         loginPage.validarLogin();
     }
+
+    // Finalizando o recurso 'driver':
+    @After
+    public void after() {
+        driver.quit();
+    }
+
 }
 
 
