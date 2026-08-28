@@ -11,7 +11,7 @@ import page.LoginPage;
 
 import java.time.Duration;
 
-public class LoginTest {
+public class SaldoInicialTest {
     // Variável que receberá a instância e inicialização do ChromeDriver:
     WebDriver driver;
     // Variável que receberá a instância da classe LoginPage, passando o driver inicializado:
@@ -45,7 +45,7 @@ public class LoginTest {
 
     // Teste:
     @Test
-    public void testeLogin() {
+    public void testeSaldoInicial() {
         //----------------------- Cadastro ----------------------------------------------
         // Clica no botão inicial 'Registrar' para abrir o formulário de cadastro na tela:
         cadastroPage.clicarPorXpath(cadastroPage.btnRegistrar);
