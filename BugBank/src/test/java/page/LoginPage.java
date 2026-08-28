@@ -26,6 +26,11 @@ public class LoginPage {
     public void preencherCampo(String elemento, String valor) {
         driver.findElement(By.xpath(elemento)).sendKeys(valor) ;
     }
+
+    // Method para validar login:
+    public void validarLogin() {
+        driver.getCurrentUrl().equals("http://localhost:3000/home");
+    }
 }
 
 
