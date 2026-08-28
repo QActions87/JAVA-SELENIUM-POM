@@ -1,6 +1,7 @@
 package suite;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import page.LoginPage;
@@ -23,6 +24,16 @@ public class LoginTest {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
         // Instanciação da classe 'LoginPage' recebendo o driver inicializado como argumento:
         loginPage = new LoginPage(driver);
+        // Acessando URL:
+        driver.get("http://localhost:3000/#");
+    }
+
+    // Teste:
+    @Test
+    public void testeLogin() {
+        loginPage.preencherCampo(loginPage.campoEmail, "qaction@gmail.com");
+        loginPage.preencherCampo(loginPage.campoSenha, "senha123");
+        loginPage.clicarPorXpath(loginPage.btnAcessar);
     }
 }
 
