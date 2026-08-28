@@ -97,7 +97,6 @@ public class LoginTest {
     public void after() {
         driver.quit();
     }
-
 }
 
 
