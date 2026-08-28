@@ -94,6 +94,9 @@ public class SaldoInicialTest {
 
         // Validando login:
         loginPage.validarLogin();
+
+        // Validando valor inicial do saldo:
+        homePage.validarSaldo("R$ 1.000,00");
     }
 
     // Finalizando o recurso 'driver':
