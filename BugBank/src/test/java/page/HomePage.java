@@ -1,5 +1,6 @@
 package page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class HomePage {
@@ -14,4 +15,41 @@ public class HomePage {
         this.driver = driver;
     }
 
+    // Method para acessar e validar o saldo:
+    public void validarSaldo() {
+        driver.findElement(By.xpath(elementoSaldo)).getText();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
