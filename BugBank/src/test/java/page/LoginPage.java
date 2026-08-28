@@ -1,5 +1,6 @@
 package page;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -29,7 +30,7 @@ public class LoginPage {
 
     // Method para validar login:
     public void validarLogin() {
-        driver.getCurrentUrl().equals("http://localhost:3000/home");
+        Assert.assertEquals("http://localhost:3000/home", driver.getCurrentUrl());
     }
 }
 
