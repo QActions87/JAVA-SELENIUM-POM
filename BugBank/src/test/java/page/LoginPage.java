@@ -18,12 +18,23 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    // Methods para interagir com os elementos mapeados:
-    public void clicarPorXpath() {
-
+    // Methods para interagir com os elementos mapeados por xpath:
+    public void clicarPorXpath(String elemento) {
+        driver.findElement(By.xpath(elemento));
     }
 
     public void preencherCampo(String elemento, String valor) {
         driver.findElement(By.xpath(elemento)).sendKeys(valor) ;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
