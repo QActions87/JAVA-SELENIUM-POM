@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import page.CadastroPage;
+import page.HomePage;
 import page.LoginPage;
 
 import java.time.Duration;
@@ -18,6 +19,8 @@ public class SaldoInicialTest {
     LoginPage loginPage;
     // Variável do tipo CadastroPage para receber uma instância e cadastrar antes do teste de login:
     CadastroPage cadastroPage;
+    // Variável que receberá a instância da HomePage:
+    HomePage homePage;
 
     @Before
     public void before() {
@@ -38,6 +41,7 @@ public class SaldoInicialTest {
         // Instanciação dos Page Objects:
         cadastroPage = new CadastroPage(driver);
         loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
 
         // Acessando a URL:
         driver.get("http://localhost:3000/#");
