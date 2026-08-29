@@ -11,6 +11,9 @@ public class HomePage {
     // Mapeando o soldo na home:
     public String elementoSaldo = "//*[@id=\"textBalance\"]/span";
 
+    //
+    public String btnTransferencia = "//*[@id=\"btn-TRANSFERÊNCIA\"]";
+
     // Construtor:
     public HomePage(WebDriver driver) {
         this.driver = driver;
