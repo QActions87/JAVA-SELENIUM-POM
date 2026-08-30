@@ -3,6 +3,11 @@ package page;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
     // Variável para receber o driver inicializado da classe de teste por meio do construtor:
@@ -24,6 +29,14 @@ public class HomePage {
         String valorAtual = driver.findElement(By.xpath(elementoSaldo)).getText();
         Assert.assertEquals(valorEsperado, valorAtual);
     }
+
+    // Metodo genérico para clicar aguardando o elemento ficar clicável
+    public void clicarPorXpath(String xpath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement elemento = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        elemento.click();
+    }
+
     /*
     // Method para acessar e validar o saldo (Valor esperado chumbado):
     public void validarSaldo() {
