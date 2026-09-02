@@ -16,7 +16,7 @@ public class HomePage {
     // Mapeando o soldo na home:
     public String elementoSaldo = "//*[@id=\"textBalance\"]/span";
 
-    //
+    // Mapeando o botão Transferência na home:
     public String btnTransferencia = "//*[@id=\"btn-TRANSFERÊNCIA\"]";
 
     // Construtor:
