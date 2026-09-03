@@ -44,11 +44,11 @@ public class TransferenciaTest {
         transferenciaPage = new TransferenciaPage(driver);
         homePage = new HomePage(driver);
     }
-
     //Testes:
     @Test
     public void testeTransferenciaComSucesso() {
-
+        cadastroPage.cadastrarNovaConta("qaction@gmail.com", "Tiago", "senha123");
+        cadastroPage.cadastrarNovaConta("qactionII@gmail.com", "Atom", "senha1234");
     }
 }
 
