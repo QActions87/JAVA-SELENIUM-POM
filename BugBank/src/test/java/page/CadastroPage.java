@@ -68,7 +68,7 @@ public class CadastroPage {
 
     // Metodo cadastrar:
     //----------------------- Cadastro ----------------------------------------------
-    public void cadastrarNovaConta(String email, String nome, String senha, String confirmacaoSenha) {
+    public void cadastrarNovaConta(String email, String nome, String senha) {
         // Clica no botão inicial 'Registrar' para abrir o formulário de cadastro na tela:
         clicarPorXpath(btnRegistrar);
         // Preenche o campo de e-mail com o endereço do usuário:
@@ -78,7 +78,7 @@ public class CadastroPage {
         // Preencher o campo de senha:
         preencherValorPorXpath(campoSenha, senha);
         // Preenche o campo de confirmação para validar a senha digitada:
-        preencherValorPorXpath(campoConfirmacaoSenha, confirmacaoSenha);
+        preencherValorPorXpath(campoConfirmacaoSenha, senha);
         // Clica no toggle para ativar a opção de criar a conta já com saldo inicial:
         clicarPorXpath(campoContaComSaldoToggle);
         // Clica no botão final 'Cadastrar' para submeter os dados do formulário:
