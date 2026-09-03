@@ -46,6 +46,7 @@ public class CadastroPage {
     public String campoContaComSaldoToggle = "//*[@id=\"toggleAddBalance\"]";
     public String btnCadastrar = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button";
     public String btnFecharModalSucessoDoCadastro = "//*[@id=\"btnCloseModal\"]";
+    public String mensagemContaCriada = "//*[@id=\"modalText\"]";
 
     // Method para preencher o campo Email:
     public void preencherValorPorXpath(String elemento, String valor) {
@@ -68,7 +69,7 @@ public class CadastroPage {
 
     // Metodo cadastrar:
     //----------------------- Cadastro ----------------------------------------------
-    public void cadastrarNovaConta(String email, String nome, String senha) {
+    public String cadastrarNovaConta(String email, String nome, String senha) {
         // Clica no botão inicial 'Registrar' para abrir o formulário de cadastro na tela:
         clicarPorXpath(btnRegistrar);
         // Preenche o campo de e-mail com o endereço do usuário:
@@ -90,6 +91,10 @@ public class CadastroPage {
         // Fechando o modal de confirmação do cadastro com o method clicarPorXpath,
         // que clica no elemento 'btnFecharModalSucessoDoCadastro':
         clicarPorXpath(btnFecharModalSucessoDoCadastro);
+        // Capturando o número da conta limpo, imprimindo e retornando:
+        String numeroConta = driver.findElement(By.xpath(mensagemContaCriada)).getText().substring(8, 13).trim();
+        System.out.println(numeroConta);
+        return numeroConta;
     }
     /*
     // Este method foi substituido. Pois,

@@ -44,7 +44,7 @@ public class TransferenciaTest {
         transferenciaPage = new TransferenciaPage(driver);
         homePage = new HomePage(driver);
     }
-    //Testes:
+    //Testes 01: Transferência com sucesso:
     @Test
     public void testeTransferenciaComSucesso() {
         // Cadastrando duas contas:
