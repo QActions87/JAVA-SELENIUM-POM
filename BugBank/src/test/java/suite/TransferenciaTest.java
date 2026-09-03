@@ -61,6 +61,7 @@ public class TransferenciaTest {
         transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDigitoConta, "1");
         transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDescricao, "Transferi 500,00 reais.");
         transferenciaPage.clicarPorXpath(transferenciaPage.btnTransferir);
+        transferenciaPage.validarTransferenciaComSucesso();
     }
 }
 
