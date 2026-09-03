@@ -52,7 +52,7 @@ public class TransferenciaTest {
         cadastroPage.cadastrarNovaConta("qactionII@gmail.com", "Atom", "senha1234");
 
         // Fazendo login:
-
+        loginPage.fazerLogin("qaction@gmail.com","senha123");
     }
 }
 
