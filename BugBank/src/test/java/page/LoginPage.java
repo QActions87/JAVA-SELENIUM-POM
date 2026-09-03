@@ -32,6 +32,19 @@ public class LoginPage {
         driver.findElement(By.xpath(elemento)).sendKeys(valor) ;
     }
 
+    // Metodo para logar:
+    public void fazerLogin(String email, String senha) {
+        //----------------------- Login com os dados do cadastro ------------------------
+        // Preencher E-mail:
+        preencherCampo(campoEmail, email);
+        // Preencher Senha:
+        preencherCampo(campoSenha, senha);
+        // Pressionar botão Acessar:
+        clicarPorXpath(btnAcessar);
+        // Validando login:
+        validarLogin();
+    }
+
     // Method para validar login:
     public void validarLogin() {
         // Cria a espera explícita de até 10 segundos para a mudança de URL

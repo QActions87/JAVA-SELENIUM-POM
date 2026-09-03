@@ -47,8 +47,12 @@ public class TransferenciaTest {
     //Testes:
     @Test
     public void testeTransferenciaComSucesso() {
+        // Cadastrando duas contas:
         cadastroPage.cadastrarNovaConta("qaction@gmail.com", "Tiago", "senha123");
         cadastroPage.cadastrarNovaConta("qactionII@gmail.com", "Atom", "senha1234");
+
+        // Fazendo login:
+
     }
 }
 
