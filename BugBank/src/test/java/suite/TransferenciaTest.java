@@ -25,14 +25,20 @@ public class TransferenciaTest {
     public void before() {
         // Configurações para estabilizar a sessão do Chrome no Linux (Zorin OS):
         org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
+        // Permite conexões WebSocket/HTTP de qualquer origem,
+        // evitando erro de CORS/segurança de comunicação do ChromeDriver (necessário a partir do Chrome 111)
         options.addArguments("--remote-allow-origins=*");
+        // Desativa o isolamento de segurança (sandbox) do Chrome;
+        // essencial para rodar o navegador em ambiente Linux sem interface gráfica, containers Docker ou rotinas de CI/CD
         options.addArguments("--no-sandbox");
+        // Força o Chrome a usar o diretório /tmp em vez de /dev/shm para memória compartilhada;
+        // previne travamentos e crashes por falta de espaço em ambientes Linux/Docker
         options.addArguments("--disable-dev-shm-usage");
-
         // Instanciação do driver passando as opções configuradas:
         driver = new ChromeDriver(options);
         // define quanto tempo o Selenium deve esperar pelo carregamento completo do HTML da página ao dar um driver.get():
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+        // Instâncias Page objects:
         loginPage = new LoginPage(driver);
         cadastroPage = new CadastroPage(driver);
         transferenciaPage = new TransferenciaPage(driver);
