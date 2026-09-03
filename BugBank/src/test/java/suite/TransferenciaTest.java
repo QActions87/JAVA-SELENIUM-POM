@@ -1,6 +1,7 @@
 package suite;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import page.CadastroPage;
@@ -36,6 +37,12 @@ public class TransferenciaTest {
         cadastroPage = new CadastroPage(driver);
         transferenciaPage = new TransferenciaPage(driver);
         homePage = new HomePage(driver);
+    }
+
+    //Testes:
+    @Test
+    public void testeTransferenciaComSucesso() {
+
     }
 }
 
