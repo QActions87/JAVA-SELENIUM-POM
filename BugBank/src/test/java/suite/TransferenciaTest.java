@@ -50,11 +50,17 @@ public class TransferenciaTest {
         // Cadastrando duas contas:
         cadastroPage.cadastrarNovaConta("qaction@gmail.com", "Tiago", "senha123");
         cadastroPage.cadastrarNovaConta("qactionII@gmail.com", "Atom", "senha1234");
-
-        // Fazendo login:
+        // Fazendo login com a 1ª conta cadastrada:
         loginPage.fazerLogin("qaction@gmail.com","senha123");
         // Clicando no botão 'Transferência' após o login:
         homePage.clicarPorXpath(homePage.btnTransferencia);
+        // Efetuando a transferência:
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoNumeroDaConta, "1234");
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDigitoConta, "1");
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoValor, "500,00");
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDigitoConta, "1");
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDescricao, "Transferi 500,00 reais.");
+        transferenciaPage.clicarPorXpath(transferenciaPage.btnTransferir);
     }
 }
 
