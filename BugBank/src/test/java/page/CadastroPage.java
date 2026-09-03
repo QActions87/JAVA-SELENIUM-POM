@@ -13,14 +13,21 @@ import java.time.Duration;
 public class CadastroPage {
     // Declarando web driver:
     WebDriver driver;
-    /** Mapeamento do Xpath do texto no modal do BugBank: */
+    /**
+     * Mapeamento do Xpath do texto no modal do BugBank:
+     */
     public String textoModalSucesso = "//*[@id=\"modalText\"]";
-    /** Method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro: */
+
+    /**
+     * Method construtor com o driver desta classe recebendo o drive de fora, recebido no parâmetro:
+     */
     public CadastroPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    /** Method para esperar o modal aparecer e capturar a mensagem: */
+    /**
+     * Method para esperar o modal aparecer e capturar a mensagem:
+     */
     public String obterTextoDoModal() {
         // 1. Cria a espera explícita de até 10 segundos:
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -47,15 +54,43 @@ public class CadastroPage {
 
 
     // Method para clicar no toggle e botão 'Cadastrar':
-    /** Clique Direto via JavaScript:
+
+    /**
+     * Clique Direto via JavaScript:
      * Se o formulário tiver algum footer fixo ou modal invisível por cima do botão,
      * o clique nativo do Selenium falha. Com esta solução,
-     * o JavaScript ignora a camada visual e dispara o evento direto no DOM. */
+     * o JavaScript ignora a camada visual e dispara o evento direto no DOM.
+     */
     public void clicarPorXpath(String xpath) {
         WebElement elemento = driver.findElement(By.xpath(xpath));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
     }
 
+    // Metodo cadastrar:
+    //----------------------- Cadastro ----------------------------------------------
+    public void cadastrarNovaConta(String email, String nome, String senha, String confirmacaoSenha) {
+        // Clica no botão inicial 'Registrar' para abrir o formulário de cadastro na tela:
+        clicarPorXpath(btnRegistrar);
+        // Preenche o campo de e-mail com o endereço do usuário:
+        preencherValorPorXpath(campoEmail, email);
+        // Preenche o campo de nome do usuário:
+        preencherValorPorXpath(campoNome, nome);
+        // Preencher o campo de senha:
+        preencherValorPorXpath(campoSenha, senha);
+        // Preenche o campo de confirmação para validar a senha digitada:
+        preencherValorPorXpath(campoConfirmacaoSenha, confirmacaoSenha);
+        // Clica no toggle para ativar a opção de criar a conta já com saldo inicial:
+        clicarPorXpath(campoContaComSaldoToggle);
+        // Clica no botão final 'Cadastrar' para submeter os dados do formulário:
+        clicarPorXpath(btnCadastrar);
+        // O method espera o modal, pega o texto interno e retorna para a variável:
+        String textoModal = obterTextoDoModal();
+        // Valida se a mensagem esperada está contida na String capturada:
+        Assert.assertTrue(textoModal.contains("foi criada com sucesso"));
+        // Fechando o modal de confirmação do cadastro com o method clicarPorXpath,
+        // que clica no elemento 'btnFecharModalSucessoDoCadastro':
+        clicarPorXpath(btnFecharModalSucessoDoCadastro);
+    }
     /*
     // Este method foi substituido. Pois,
     // o 'getPageSource()' baixa o HTML da página para fazer a busca em texto bruto, sendo mais custoso para a memória.
@@ -65,9 +100,8 @@ public class CadastroPage {
         Assert.assertTrue(driver.getPageSource().contains("foi criada com sucesso"));
     }
     */
+
 }
-
-
 
 
 
