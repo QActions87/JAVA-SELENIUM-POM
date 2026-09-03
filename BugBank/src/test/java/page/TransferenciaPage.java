@@ -1,5 +1,6 @@
 package page;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -47,5 +48,15 @@ public class TransferenciaPage {
         // 3. Captura e retorna o texto contido dentro da tag HTML:
         return elementoModal.getText();
     }
+
+    // Metodo para validar o sucesso da transferência:
+    public void validarTransferenciaComSucesso() {
+        // O method espera o modal, pega o texto interno e retorna para a variável:
+        String textoModal = obterTextoModal();
+        // Valida se a mensagem esperada está contida na String capturada:
+        Assert.assertTrue(textoModal.contains("Transferencia realizada com sucesso"));
+    }
+
+
 
 }
