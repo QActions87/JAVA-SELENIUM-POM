@@ -48,8 +48,8 @@ public class TransferenciaTest {
     @Test
     public void testeTransferenciaComSucesso() {
         // Cadastrando duas contas:
-        cadastroPage.cadastrarNovaConta("qaction@gmail.com", "Tiago", "senha123");
-        cadastroPage.cadastrarNovaConta("qactionII@gmail.com", "Atom", "senha1234");
+        String numConta1 = cadastroPage.cadastrarNovaConta("qaction@gmail.com", "Tiago", "senha123");
+        String numConta2 = cadastroPage.cadastrarNovaConta("qactionII@gmail.com", "Atom", "senha1234");
         // Fazendo login com a 1ª conta cadastrada:
         loginPage.fazerLogin("qaction@gmail.com","senha123");
         // Clicando no botão 'Transferência' após o login:
