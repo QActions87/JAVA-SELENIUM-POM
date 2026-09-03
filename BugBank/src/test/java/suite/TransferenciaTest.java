@@ -53,6 +53,8 @@ public class TransferenciaTest {
 
         // Fazendo login:
         loginPage.fazerLogin("qaction@gmail.com","senha123");
+        // Clicando no botão 'Transferência' após o login:
+        homePage.clicarPorXpath(homePage.btnTransferencia);
     }
 }
 
