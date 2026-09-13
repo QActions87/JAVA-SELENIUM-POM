@@ -1,4 +1,4 @@
-# Projeto: Testes de UI com JAVA, SELENIUM e padrão de projeto POM
+# Projeto: Testes de UI com JAVA, SELENIUM e padrão POM
 
 
 ### 📋 Pré-requisito para execução
