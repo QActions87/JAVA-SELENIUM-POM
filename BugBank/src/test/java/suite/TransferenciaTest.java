@@ -43,6 +43,7 @@ public class TransferenciaTest {
         cadastroPage = new CadastroPage(driver);
         transferenciaPage = new TransferenciaPage(driver);
         homePage = new HomePage(driver);
+        driver.get("http://localhost:3000/");
     }
     //Testes 01: Transferência com sucesso:
     @Test
