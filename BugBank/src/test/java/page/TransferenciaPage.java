@@ -2,61 +2,55 @@ package page;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class TransferenciaPage {
-    // Mapeia os elementos dos campos e botão da página Transferência:
-    public String campoNumeroDaConta = "//*[@id=\"__next\"]/div/div[3]/form/div[1]/div[1]/input";
-    public String campoDigitoConta = "//*[@id=\"__next\"]/div/div[3]/form/div[1]/div[2]/input";
-    public String campoValor = "//*[@id=\"__next\"]/div/div[3]/form/div[2]/input";
-    public String campoDescricao = "//*[@id=\"__next\"]/div/div[3]/form/div[3]/input";
-    public String btnTransferir = "//*[@id=\"__next\"]/div/div[3]/form/button";
-    public String modalConfirmaTransferencia = "//*[@id=\"modalText\"]";
 
-    // Variável para receber o driver inicializado da classe de teste por meio do construtor:
+    // Mapeia os elementos dos campos e botão da página Transferência:
+    public String campoNumeroDaConta = "//body/div[@id='__next']/div[1]/div[3]/form[1]/div[1]/div[1]/input[1]";
+    public String campoDigitoConta = "//body/div[@id='__next']/div[1]/div[3]/form[1]/div[1]/div[2]/input[1]";
+    public String campoValor = "//body/div[@id='__next']/div[1]/div[3]/form[1]/div[2]/input[1]";
+    public String campoDescricao = "//body/div[@id='__next']/div[1]/div[3]/form[1]/div[3]/input[1]";
+    public String btnTransferir = "//button[contains(text(), 'Transferir agora')]";
+
+    // Variável de referência do WebDriver:
     WebDriver driver;
 
-    // Construtor:
+    // Construtor com injeção do WebDriver:
     public TransferenciaPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    // Method para preencher o campo Email:
+    // Metodo para preencher os valores nos campos digitáveis:
     public void preencherValorPorXpath(String elemento, String valor) {
         driver.findElement(By.xpath(elemento)).sendKeys(valor);
     }
 
-    // Metodo genérico para clicar aguardando o elemento ficar clicável
-    public void clicarPorXpath(String xpath) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement elemento = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-        elemento.click();
+    // Metodo genérico para clicar aguardando o elemento estar visível via expressão Lambda:
+    public void clicarPorXpath(String elemento) {
+        // Declaração do Wait usando a interface genérica Wait<WebDriver>
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        // Aguarda até que o elemento esteja visível no DOM usando a sintaxe de expressão Lambda
+        wait.until(d -> d.findElement(By.xpath(elemento)).isDisplayed());
+
+        // Dispara o clique no elemento
+        driver.findElement(By.xpath(elemento)).click();
     }
 
-    /** Obtendo o texto do modal após a transferência */
-    public String obterTextoModal() {
-        // 1. Cria a espera explícita de até 10 segundos:
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // 2. 'wait' aguarda até que o elemento do modal esteja visível na tela, atribuído à variável 'elementoModal':
-        WebElement elementoModal = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(modalConfirmaTransferencia)));
-        // 3. Captura e retorna o texto contido dentro da tag HTML:
-        return elementoModal.getText();
-    }
-
-    // Metodo para validar o sucesso da transferência:
+    // Metodo para validar se a transferência foi efetuada com sucesso:
     public void validarTransferenciaComSucesso() {
-        // O method espera o modal, pega o texto interno e retorna para a variável:
-        String textoModal = obterTextoModal();
-        // Valida se a mensagem esperada está contida na String capturada:
-        Assert.assertTrue(textoModal.contains("Transferencia realizada com sucesso"));
+        // 1. Cria a espera dinâmica de até 5 segundos
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        // 2. Aguarda até que o código fonte do HTML (getPageSource) contenha a frase informada
+        wait.until(d -> d.getPageSource().contains("Transferencia realizada com sucesso"));
+
+        // 3. Realiza a asserção final verificando se o texto está no código fonte do HTML
+        Assert.assertTrue("Erro ao validar a transferencia!", driver.getPageSource().contains("Transferencia realizada com sucesso"));
     }
-
-
-
 }
