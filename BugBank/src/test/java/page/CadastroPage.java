@@ -14,9 +14,9 @@ public class CadastroPage {
 
     private WebDriver driver;
 
-    // Atributos de Estado para armazenar os dados extraídos do cadastro
-    private String conta;
-    private String digito;
+    // Atributos alterados para public para permitirem o acesso direto no teste (cadastroPage.conta)
+    public String conta;
+    public String digito;
 
     // Mapeamento dos elementos por Xpath
     public String btnRegistrar = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]";
@@ -34,7 +34,7 @@ public class CadastroPage {
         this.driver = driver;
     }
 
-    // Getters encapsulados para acessar a conta e o dígito após a execução do cadastro
+    // Getters mantidos para boa prática de encapsulamento
     public String getConta() {
         return conta;
     }
@@ -60,43 +60,58 @@ public class CadastroPage {
         return elementoModal.getText();
     }
 
-    // Method para realizar o fluxo de cadastro e separar a conta do dígito
+    // Método 1: Cadastra conta COM saldo (clica no toggle de saldo)
     public String cadastrarNovaConta(String email, String nome, String senha) {
         clicarPorXpath(btnRegistrar);
         preencherValorPorXpath(campoEmail, email);
         preencherValorPorXpath(campoNome, nome);
         preencherValorPorXpath(campoSenha, senha);
         preencherValorPorXpath(campoConfirmacaoSenha, senha);
+
+        // Ativa o toggle para adicionar saldo na conta
         clicarPorXpath(campoContaComSaldoToggle);
         clicarPorXpath(btnCadastrar);
 
-        // 1. Obtém a mensagem de sucesso usando o Explicit Wait
+        return processarModalExtrairDados();
+    }
+
+    // Método 2: Cadastra conta SEM saldo (NÃO clica no toggle de saldo)
+    public String cadastrarNovaContaSemSaldo(String email, String nome, String senha) {
+        clicarPorXpath(btnRegistrar);
+        preencherValorPorXpath(campoEmail, email);
+        preencherValorPorXpath(campoNome, nome);
+        preencherValorPorXpath(campoSenha, senha);
+        preencherValorPorXpath(campoConfirmacaoSenha, senha);
+
+        // Sem o clique no campoContaComSaldoToggle
+        clicarPorXpath(btnCadastrar);
+
+        return processarModalExtrairDados();
+    }
+
+    // Método privado reutilizável para extrair o número da conta e dígito do modal
+    private String processarModalExtrairDados() {
         String mensagemCadastro = obterTextoDoModal();
 
-        // 2. Valida se o modal realmente abriu confirmando a criação da conta
         Assert.assertTrue(mensagemCadastro.contains("foi criada com sucesso"));
 
-        // 3. Separa a mensagem para isolar a estrutura "123-4" (Lógica do Print do Professor)
+        // Isola a estrutura "123-4" vinda do texto do modal
         String[] numConta = mensagemCadastro.split("conta | foi");
         String txtContaEDigito = numConta[1].trim();
 
-        // 4. Separa a conta do dígito pelo hífen
+        // Separa conta e dígito pelo hífen
         String[] contaDigito = txtContaEDigito.split("-");
 
-        // 5. Guarda nos atributos de instância da classe
         this.conta = contaDigito[0];
         this.digito = contaDigito[1];
 
-        // Debug no terminal para ver os valores separados
         System.out.println("Conta extraída: " + this.conta);
         System.out.println("Dígito extraído: " + this.digito);
 
-        // 6. Fecha o modal de confirmação no final
         clicarPorXpath(btnFecharModalSucessoDoCadastro);
         return mensagemCadastro;
     }
 }
-
 
 
 

@@ -1,9 +1,11 @@
 package suite;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import page.CadastroPage;
 import page.HomePage;
 import page.LoginPage;
@@ -12,76 +14,67 @@ import page.TransferenciaPage;
 import java.time.Duration;
 
 public class TransferenciaTest {
-    // Atributos driver e variáveis que receberão as instâncias das Page Objects,
-    // para proverem os passos anteriores a transferẽncia:
+
     WebDriver driver;
     LoginPage loginPage;
     CadastroPage cadastroPage;
-    HomePage homePage;
     TransferenciaPage transferenciaPage;
+    HomePage homePage;
 
-    // Preparando o ambiente:
     @Before
     public void before() {
-        // Configurações para estabilizar a sessão do Chrome no Linux (Zorin OS):
-        org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
-        // Permite conexões WebSocket/HTTP de qualquer origem,
-        // evitando erro de CORS/segurança de comunicação do ChromeDriver (necessário a partir do Chrome 111)
-        options.addArguments("--remote-allow-origins=*");
-        // Desativa o isolamento de segurança (sandbox) do Chrome;
-        // essencial para rodar o navegador em ambiente Linux sem interface gráfica, containers Docker ou rotinas de CI/CD
+        // Configurações essenciais do Chrome para execução em Linux
+        ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
-        // Força o Chrome a usar o diretório /tmp em vez de /dev/shm para memória compartilhada;
-        // previne travamentos e crashes por falta de espaço em ambientes Linux/Docker
         options.addArguments("--disable-dev-shm-usage");
-        // Instanciação do driver passando as opções configuradas:
+        options.addArguments("--remote-allow-origins=*");
+
+        // Inicializa o driver com as opções
         driver = new ChromeDriver(options);
-        // define quanto tempo o Selenium deve esperar pelo carregamento completo do HTML da página ao dar um driver.get():
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
-        // Instâncias Page objects:
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+
+        // Instancia os Page Objects
         loginPage = new LoginPage(driver);
         cadastroPage = new CadastroPage(driver);
         transferenciaPage = new TransferenciaPage(driver);
         homePage = new HomePage(driver);
+
         driver.get("http://localhost:3000/");
     }
-    //Testes 01: Transferência com sucesso:
+
     @Test
     public void testeTransferenciaComSucesso() {
-        // Cadastrando duas contas:
-        String numConta1 = cadastroPage.cadastrarNovaConta("qaction@gmail.com", "Tiago", "senha123");
-        String numConta2 = cadastroPage.cadastrarNovaConta("qactionII@gmail.com", "Atom", "senha1234");
-        // Fazendo login com a 1ª conta cadastrada:
-        loginPage.fazerLogin("qaction@gmail.com","senha123");
-        // Clicando no botão 'Transferência' após o login:
+        // 1. Cadastra a primeira conta (remetente)
+        cadastroPage.cadastrarNovaConta("qactionI@gmail.com.br", "qactionI", "123456");
+
+        // 2. Cadastra a segunda conta (destinatário) e armazena os dados gerados
+        cadastroPage.cadastrarNovaContaSemSaldo("qactionII@gmail.com.br", "qactionII", "123456");
+        String conta2 = cadastroPage.conta;
+        String digito2 = cadastroPage.digito;
+
+        // 3. Faz login com a primeira conta
+        loginPage.fazerLogin("qactionI@gmail.com.br", "123456");
+
+        // 4. Navega até a tela de transferência
         homePage.clicarPorXpath(homePage.btnTransferencia);
-        // Efetuando a transferência:
-        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoNumeroDaConta, "1234");
-        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDigitoConta, "1");
+
+        // 5. Preenche os dados da transferência utilizando as variáveis da segunda conta
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoNumeroDaConta, conta2);
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDigitoConta, digito2);
         transferenciaPage.preencherValorPorXpath(transferenciaPage.campoValor, "500.00");
-        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDescricao, "Transferi 500,00 reais.");
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDescricao, "Aula QA Academy");
+
+        // 6. Confirma a transferência e valida a mensagem no modal
         transferenciaPage.clicarPorXpath(transferenciaPage.btnTransferir);
-        transferenciaPage.validarTransferenciaComSucesso();
+        transferenciaPage.validarTransferenciaSucesso();
+    }
+
+    @After
+    public void after() {
+        // Evita o NullPointerException caso a sessão falhe no @Before
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
