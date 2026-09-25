@@ -42,4 +42,20 @@ public class TransferenciaPage {
         wait.until(d -> d.getPageSource().contains("Transferencia realizada com sucesso"));
         Assert.assertTrue("Erro ao validar a transferencia!", driver.getPageSource().contains("Transferencia realizada com sucesso"));
     }
+
+    /** Valida a mensagem de ERRO na transferência, ao tentar transferir sem saldo o suficiente. */
+    public void validarErroNaTransferencia() {
+        String mensagemDeErro = "Você não tem saldo suficiente para essa transação";
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(d -> d.getPageSource().contains(mensagemDeErro));
+        Assert.assertTrue("Erro ao validar a transferencia!", driver.getPageSource().contains(mensagemDeErro));
+    }
 }
+
+
+
+
+
+
+
+

@@ -42,7 +42,7 @@ public class TransferenciaTest {
 
         driver.get("http://localhost:3000/");
     }
-
+    /** 1º Teste: Transferência com sucesso por ter saldo. */
     @Test
     public void testeTransferenciaComSucesso() {
         // 1. Cadastra a primeira conta (remetente)
@@ -70,6 +70,17 @@ public class TransferenciaTest {
         transferenciaPage.validarTransferenciaSucesso();
     }
 
+    /** 2º Teste: Erro ao tentar transferir por saldo insuficiente */
+    @Test
+    public void testeTransferenciaComErro() {
+        loginPage.fazerLogin("qactionI@gmail.com.br", "123456");
+        homePage.clicarPorXpath(homePage.btnTransferencia);
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoValor, "1000.01");
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDescricao, "Teste Negativo!");
+        transferenciaPage.validarErroNaTransferencia();
+    }
+
+
     @After
     public void after() {
         // Evita o NullPointerException caso a sessão falhe no @Before
@@ -78,3 +89,20 @@ public class TransferenciaTest {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

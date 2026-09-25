@@ -60,7 +60,7 @@ public class CadastroPage {
         return elementoModal.getText();
     }
 
-    // Método 1: Cadastra conta COM saldo (clica no toggle de saldo)
+    // Metodo 1: Cadastra conta COM saldo (clica no toggle de saldo)
     public String cadastrarNovaConta(String email, String nome, String senha) {
         clicarPorXpath(btnRegistrar);
         preencherValorPorXpath(campoEmail, email);
@@ -75,7 +75,7 @@ public class CadastroPage {
         return processarModalExtrairDados();
     }
 
-    // Método 2: Cadastra conta SEM saldo (NÃO clica no toggle de saldo)
+    // Metodo 2: Cadastra conta SEM saldo (NÃO clica no toggle de saldo)
     public String cadastrarNovaContaSemSaldo(String email, String nome, String senha) {
         clicarPorXpath(btnRegistrar);
         preencherValorPorXpath(campoEmail, email);
@@ -89,7 +89,7 @@ public class CadastroPage {
         return processarModalExtrairDados();
     }
 
-    // Método privado reutilizável para extrair o número da conta e dígito do modal
+    // Metodo privado reutilizável para extrair o número da conta e dígito do modal
     private String processarModalExtrairDados() {
         String mensagemCadastro = obterTextoDoModal();
 
